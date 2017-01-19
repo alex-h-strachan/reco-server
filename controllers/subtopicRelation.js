@@ -1,9 +1,13 @@
 class Relation {
-    constructor(parent, subtopic, linkPercent) {
+    constructor(parent, subtopic, linkPercent = 0) {
         this.parent = parent;
         this.subtopic = subtopic;
         this.linkPercent = linkPercent;
     }
+}
+
+class RelationTable {
+    
 }
 
 function subtopicRelations(subtopic) {
@@ -15,3 +19,7 @@ function subtopicRelations(subtopic) {
 }
 
 module.exports = subtopicRelations;
+module.exports.internals = {
+    Relation,
+    RelationTable
+};
