@@ -35,6 +35,31 @@ describe('subtopicRelation internals', () => {
             }
         });
     });
+
+    describe('User', () => {
+        it('constructs without error', done => {
+            var user = new subtopicRelation.internals.User(listens[0].user);
+            if(user instanceof subtopicRelation.internals.User) {
+                return done();
+            } else {
+                return done(
+                    new Error('User malformed')
+                );
+            }
+        });
+        it('should increment listens', done => {
+            var user = new subtopicRelation.internals.User(listens[0].user);
+            user.listen(listens[0]);
+            if(user.listenedTo[listens[0].subtopic] == 1) {
+                return done();
+            } else {
+                return done(
+                    new Error('user listen count wasn\'t correct')
+                );
+            }
+        });
+    });
+
     describe('RelationTable', () => {
         it('constructs without error', done => {
             var table = new subtopicRelation.internals.RelationTable(listens, subtopics);

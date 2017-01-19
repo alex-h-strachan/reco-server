@@ -12,6 +12,17 @@ class Relation {
     }
 }
 
+class User {
+    constructor(id) {
+        this.id = id;
+        this.listenedTo = {};
+    }
+
+    listen(listen) {
+        this.listenedTo[listen.subtopic] = (this.listenedTo[listen.subtopic] || 0) + 1;
+    }
+}
+
 class RelationTable {
     constructor(listens, subtopics) {
         this.subtopicIDs = subtopics.map( st => st.id );
@@ -32,5 +43,6 @@ function subtopicRelations(subtopic) {
 module.exports = subtopicRelations;
 module.exports.internals = {
     Relation,
+    User,
     RelationTable
 };
