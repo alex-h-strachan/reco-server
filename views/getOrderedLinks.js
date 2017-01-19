@@ -1,6 +1,6 @@
 var subtopicRelation = require('../controllers/subtopicRelation');
 
-function getRecommendations(subtopic, limit = 10) {
+function getOrderedLinks(subtopic, limit = 10) {
 
     // get relations
     var relations = subtopicRelation.getRelation(subtopic);
@@ -17,4 +17,4 @@ function getRecommendations(subtopic, limit = 10) {
     return relations.slice(0, limit);
 }
 
-module.exports = getRecommendations;
+module.exports = getOrderedLinks;

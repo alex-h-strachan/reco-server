@@ -2,31 +2,31 @@
 /*global describe*/
 /*global it*/
 
-var recommendation,
+var getOrderedLinks,
     subtopics;
 
 before(function() {
     this.timeout(0);
-    recommendation = require('../../views/recommendation');
+    getOrderedLinks = require('../../views/getOrderedLinks');
     subtopics = require('../../data/subtopics.json');
 });
 
-describe('recommendation view', function() {
-    it('should return a recommendation for a valid category', done => {
-        var recs = recommendation(subtopics[0].id);
+describe('getOrderedLinks view', function() {
+    it('should return a getOrderedLinks for a valid category', done => {
+        var recs = getOrderedLinks(subtopics[0].id);
         if(recs.length > 0) {
             return done();
         } else {
-            return done(new Error('recommendations weren\'t generated'));
+            return done(new Error('getOrderedLinkss weren\'t generated'));
         }
     });
-    it('should sort the recommendations by their strength', done => {
-        var recs = recommendation(subtopics[0].id);
+    it('should sort the getOrderedLinkss by their strength', done => {
+        var recs = getOrderedLinks(subtopics[0].id);
         var links = recs.map( r => r.links );
         var prev = links[0];
         for( let i in links ) {
             if(links[i] > prev) {
-                return done(new Error('recommendations weren\'t ordered')); 
+                return done(new Error('getOrderedLinkss weren\'t ordered')); 
             }
             prev = links[i];
         }
@@ -34,7 +34,7 @@ describe('recommendation view', function() {
     });
     
     it('shouldn\'t recommend itsself', done => {
-        var recs = recommendation(subtopics[0].id);
+        var recs = getOrderedLinks(subtopics[0].id);
         var ids = recs.map( r => r.subtopic );
         if(ids.includes(subtopics[0].id)) {
             return done(new Error('subtopic recommended self'));
@@ -43,7 +43,7 @@ describe('recommendation view', function() {
     });
 
     it('should respect the requested limit', done => {
-        var recs = recommendation(subtopics[0].id, 5);
+        var recs = getOrderedLinks(subtopics[0].id, 5);
         if(recs.length != 5) {
             return done(new Error('limit ignored'));
         }
