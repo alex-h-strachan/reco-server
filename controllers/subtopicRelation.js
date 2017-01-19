@@ -62,15 +62,23 @@ class RelationTable {
     }
 }
 
-function subtopicRelations(subtopic) {
-    var relations = [
-        new Relation(subtopic, 1, 1)
-    ];
 
-    return relations;
-}
+// initialize the controller
+var subtopics = require('../data/subtopics.json');
+var listens = require('../data/listens.json');
 
-module.exports = subtopicRelations;
+var relationTable = new RelationTable(listens, subtopics);
+
+var methods = {
+    getRelation(subtopicID) {
+        return relationTable[subtopicID];
+    },
+    listen(listen) {
+        relationTable.updateRelations(listen);
+    }
+};
+
+module.exports = methods;
 module.exports.internals = {
     Relation,
     RelationTable,

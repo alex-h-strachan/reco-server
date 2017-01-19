@@ -161,7 +161,7 @@ describe('subtopicRelation internals', () => {
 
 describe('subtopicRelation', () => {
     it('should take a subtopic and return a set of relations', done => {
-        var relations = subtopicRelation(subtopics[0]);
+        var relations = subtopicRelation.getRelation(subtopics[0].id);
         if(
             Array.isArray(relations) 
             && relations[0] instanceof subtopicRelation.internals.Relation
