@@ -1,3 +1,7 @@
+/*global before*/
+/*global describe*/
+/*global it*/
+
 var subtopicRelation;
 
 before(function() {
@@ -7,5 +11,5 @@ before(function() {
 describe('subtopicRelation', function() {
     it('should work', function(done) {
         done();
-    })
+    });
 });
