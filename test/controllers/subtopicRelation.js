@@ -86,8 +86,13 @@ describe('subtopicRelation internals', () => {
     });
 
     describe('RelationTable', () => {
+        var table;
+        before( function() {
+            this.timeout(0);
+            table = new subtopicRelation.internals.RelationTable(listens, subtopics);
+        });
+
         it('constructs without error', done => {
-            var table = new subtopicRelation.internals.RelationTable(listens, subtopics);
             if(table instanceof subtopicRelation.internals.RelationTable) {
                 return done();
             } else {
@@ -97,7 +102,6 @@ describe('subtopicRelation internals', () => {
             }
         });
         it('has a row of relationships for each subtopic', done => {
-            var table = new subtopicRelation.internals.RelationTable(listens, subtopics);
             for(let i in subtopics) {
                 let id = subtopics[i].id;
                 if(!Array.isArray(table[id])) {

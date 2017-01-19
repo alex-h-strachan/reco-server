@@ -50,6 +50,7 @@ class RelationTable {
         });
 
         this.userTable = new UserTable(listens);
+        listens.forEach( l => this.updateRelations(l) );
     }
 
     updateRelations(listen) {
