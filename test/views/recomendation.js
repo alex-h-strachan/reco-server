@@ -11,13 +11,25 @@ before(function() {
     subtopics = require('../../data/subtopics.json');
 });
 
-describe('recommendation', function() {
+describe('recommendation view', function() {
     it('should return a recommendation for a valid category', done => {
-        var recs = recommendation(subtopics[0].id, 10);
+        var recs = recommendation(subtopics[0].id);
         if(recs.length > 0) {
             return done();
         } else {
             return done(new Error('recommendations weren\'t generated'));
         }
+    });
+    it('should sort the recommendations by their strength', done => {
+        var recs = recommendation(subtopics[0].id);
+        var links = recs.map( r => r.links );
+        var prev = links[0];
+        for( let i in links ) {
+            if(links[i] > prev) {
+                return done(new Error('recommendations weren\'t ordered')); 
+            }
+            prev = links[i];
+        }
+        return done();
     });
 });
