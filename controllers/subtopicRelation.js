@@ -51,6 +51,13 @@ class RelationTable {
 
         this.userTable = new UserTable(listens);
     }
+
+    updateRelations(listen) {
+        var user = this.userTable.user(listen.user);
+        var row = this[listen.subtopic];
+
+        row.filter( rel => user.listenedTo[rel.subtopic] ).forEach( rel => rel.addLink() );
+    }
 }
 
 function subtopicRelations(subtopic) {

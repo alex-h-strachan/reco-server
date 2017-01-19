@@ -108,6 +108,30 @@ describe('subtopicRelation internals', () => {
             }
             return done();
         });
+        it('updates relations for subtopics when a listen is recorded', done => {
+            var table = new subtopicRelation.internals.RelationTable([], subtopics);
+            var subtopicID = subtopics[0].id;
+            var listen = {
+                subtopic: subtopicID,
+                user: 0
+            };
+
+            // create a new user to listen to the subtopic
+            var user = table.userTable.user(0);
+            user.listen(listen);
+
+            table.updateRelations(listen);
+
+            var rel = table[subtopicID].filter(rel => rel.subtopic == subtopicID)[0];
+
+            if(rel.links == 1) {
+                return done();
+            } else {
+                return done(
+                    new Error('relationship didn\'t update')
+                );
+            }
+        });
     });
 });
 
