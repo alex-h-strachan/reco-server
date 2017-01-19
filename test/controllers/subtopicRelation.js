@@ -6,7 +6,8 @@ var subtopicRelation,
     subtopics,
     listens;
 
-before(() => {
+before(function() {
+    this.timeout(0);
     subtopicRelation = require('../../controllers/subtopicRelation.js');
     subtopics = require('../../data/subtopics.json');
     listens = require('../../data/listens.json');
@@ -111,6 +112,25 @@ describe('subtopicRelation internals', () => {
                 }
             }
             return done();
+        });
+        it('has at least some relationship data recorded', done => {
+            var nonzeroEntries = 0;
+            var requiredNonzeroToPass = 100;
+
+            for(let i in subtopics) {
+                let id = subtopics[i].id;
+
+                var nonZeroRels = table[id].filter(rel => rel.links > 0);
+                nonzeroEntries += nonZeroRels.length;
+            }
+
+            if(nonzeroEntries > requiredNonzeroToPass) {
+                return done();
+            } else if(nonzeroEntries > 0){
+                return done(new Error('some data found, but below passing threshold'));
+            } else {
+                return done(new Error('no data relationships recorded in data table'));
+            }
         });
         it('updates relations for subtopics when a listen is recorded', done => {
             var table = new subtopicRelation.internals.RelationTable([], subtopics);
