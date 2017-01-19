@@ -1,0 +1,1 @@
+import { recommend } from './controllers/recommendations/recommend.js'
