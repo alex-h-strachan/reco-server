@@ -32,4 +32,13 @@ describe('recommendation view', function() {
         }
         return done();
     });
+    
+    it('shouldn\'t recommend itsself', done => {
+        var recs = recommendation(subtopics[0].id);
+        var ids = recs.map( r => r.subtopic );
+        if(ids.includes(subtopics[0].id)) {
+            return done(new Error('subtopic recommended self'));
+        }
+        done();
+    });
 });
