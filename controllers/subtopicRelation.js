@@ -1,8 +1,14 @@
 class Relation {
-    constructor(parent, subtopic, linkPercent = 0) {
+    constructor(parent, subtopic, links = 0) {
         this.parent = parent;
         this.subtopic = subtopic;
-        this.linkPercent = linkPercent;
+        this.links = links;
+    }
+
+    addLink() {
+        // increase link count
+        this.links++;
+        return this;
     }
 }
 

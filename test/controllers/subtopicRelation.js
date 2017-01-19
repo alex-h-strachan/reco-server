@@ -26,7 +26,7 @@ describe('subtopicRelation internals', () => {
         });
         it('constructs with the expected properties', done => {
             var relation = new subtopicRelation.internals.Relation('0', 1, 1);
-            if(relation.parent && relation.linkPercent && relation.subtopic) {
+            if(relation.parent && relation.links && relation.subtopic) {
                 return done();
             } else {
                 return done(
