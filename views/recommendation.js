@@ -1,0 +1,1 @@
+var subtopicRelation = require('../controllers/subtopicRelation');
