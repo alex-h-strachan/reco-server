@@ -41,4 +41,12 @@ describe('recommendation view', function() {
         }
         done();
     });
+
+    it('should respect the requested limit', done => {
+        var recs = recommendation(subtopics[0].id, 5);
+        if(recs.length != 5) {
+            return done(new Error('limit ignored'));
+        }
+        return done();
+    });
 });
