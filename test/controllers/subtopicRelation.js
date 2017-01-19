@@ -60,6 +60,31 @@ describe('subtopicRelation internals', () => {
         });
     });
 
+    describe('UserTable', () => {
+        it('constructs without error', done => {
+            var userTable = new subtopicRelation.internals.UserTable(listens);
+            if(userTable instanceof subtopicRelation.internals.UserTable) {
+                return done();
+            } else {
+                return done(
+                    new Error('UserTable malformed')
+                );
+            }
+        });
+        it('has an entry for each user in the listens data', done => {
+            var userTable = new subtopicRelation.internals.UserTable(listens);
+            for(let i in listens) {
+                let id = listens[i].user;
+                if(!(userTable[id] instanceof subtopicRelation.internals.User)) {
+                    return done(
+                        new Error('Table was missing user')
+                    );
+                }
+            }
+            return done();
+        });
+    });
+
     describe('RelationTable', () => {
         it('constructs without error', done => {
             var table = new subtopicRelation.internals.RelationTable(listens, subtopics);
@@ -74,7 +99,7 @@ describe('subtopicRelation internals', () => {
         it('has a row of relationships for each subtopic', done => {
             var table = new subtopicRelation.internals.RelationTable(listens, subtopics);
             for(let i in subtopics) {
-                var id = subtopics[i].id;
+                let id = subtopics[i].id;
                 if(!Array.isArray(table[id])) {
                     return done(
                         new Error('Table was missing a subtopic')

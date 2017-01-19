@@ -23,6 +23,18 @@ class User {
     }
 }
 
+class UserTable {
+    constructor(listens) {
+        listens.forEach(l => {
+            if(!this[l.user]) {
+                this[l.user] = new User(l.user);
+            }
+
+            this[l.user].listen(l);
+        });
+    }
+}
+
 class RelationTable {
     constructor(listens, subtopics) {
         this.subtopicIDs = subtopics.map( st => st.id );
@@ -43,6 +55,7 @@ function subtopicRelations(subtopic) {
 module.exports = subtopicRelations;
 module.exports.internals = {
     Relation,
+    RelationTable,
     User,
-    RelationTable
+    UserTable
 };
