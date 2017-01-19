@@ -5,7 +5,7 @@
 var recommendation;
 
 before(function() {
-    recommendation = require('../../controllers/recommendation');
+    recommendation = require('../../routers/recommendation');
 });
 
 describe('recommendation', function() {
