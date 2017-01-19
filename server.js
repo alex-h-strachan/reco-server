@@ -1,10 +1,5 @@
 var config = require('./config.json');
-var express = require('express');
-var app = express();
-
-app.get('/', function (req, res) {
-    res.send('Hello World!');
-});
+var app = require('./app');
 
 app.listen(config.port, function () {
     // eslint-disable-next-line no-console
