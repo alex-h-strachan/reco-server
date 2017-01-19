@@ -75,7 +75,7 @@ describe('subtopicRelation internals', () => {
             var userTable = new subtopicRelation.internals.UserTable(listens);
             for(let i in listens) {
                 let id = listens[i].user;
-                if(!(userTable[id] instanceof subtopicRelation.internals.User)) {
+                if(!(userTable.user(id) instanceof subtopicRelation.internals.User)) {
                     return done(
                         new Error('Table was missing user')
                     );
