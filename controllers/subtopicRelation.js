@@ -7,7 +7,12 @@ class Relation {
 }
 
 class RelationTable {
-    
+    constructor(listens, subtopics) {
+        this.subtopicIDs = subtopics.map( st => st.id );
+        this.subtopicIDs.forEach( id => {
+            this[id] = this.subtopicIDs.map( st => new Relation(id, st) );
+        });
+    }
 }
 
 function subtopicRelations(subtopic) {
