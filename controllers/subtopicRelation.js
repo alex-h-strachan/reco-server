@@ -24,13 +24,8 @@ class User {
 }
 
 class UserTable {
-    constructor(listens) {
+    constructor() {
         this._users = {};
-
-        listens.forEach(l => {
-            var user = this.user(l.user);
-            user.listen(l);
-        });
     }
 
     user(id) {
@@ -49,8 +44,14 @@ class RelationTable {
             this[id] = this.subtopicIDs.map( st => new Relation(id, st) );
         });
 
-        this.userTable = new UserTable(listens);
-        listens.forEach( l => this.updateRelations(l) );
+        this.userTable = new UserTable();
+        listens.forEach( l => this.recordListen(l) );
+    }
+
+    recordListen(listen) {
+        var user = this.userTable.user(listen.user);
+        user.listen(listen);
+        this.updateRelations(listen);
     }
 
     updateRelations(listen) {
