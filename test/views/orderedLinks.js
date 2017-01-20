@@ -7,7 +7,7 @@ var getOrderedLinks,
 
 before(function() {
     this.timeout(0);
-    getOrderedLinks = require('../../views/getOrderedLinks');
+    getOrderedLinks = require('../../views/orderedLinks');
     subtopics = require('../../data/subtopics.json');
 });
 
