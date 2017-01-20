@@ -14,9 +14,9 @@ before(function() {
 describe('recommendations', () => {
     it('should return a set of subtopics', done => {
         var recs = recommendations(subtopics[0].id);
-        if(recs[0].name) {
+        if(!isNaN(parseInt(recs[0]))) {
             return done();
         }
-        return done(new Error('first recommendation missing name property'));
+        return done(new Error('first recommendation wasn\'t an integer'));
     });
 });
