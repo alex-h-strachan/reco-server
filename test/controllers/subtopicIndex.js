@@ -6,7 +6,7 @@ var subtopicIndex,
     subtopics;
 
 before(function() {
-    subtopicIndex = require('../../controllers/subtopicIndex.js');
+    subtopicIndex = require('../../controllers/subtopicIndex');
     subtopics = require('../../data/subtopics.json');
 });
 
