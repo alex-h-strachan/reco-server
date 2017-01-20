@@ -17,7 +17,15 @@ localhost:3000/recommendations?subtopic=57d80b25e04b0603003bffa3&limit=3&pretty=
 And see the recommendations!
 
 API reference:
-The server has only the /recommendations route which supports the following options in the query string
+The server has two routes
+
+/recommendations route which supports the following options in the query string
 subtopic (required): the UUID of the subtopic that the recommendations should be based on.
 limit: an integer specifying the number of results desired
 pretty: a boolean specifying whether the result should be rendered
+
+/listen route which receives post requests for new user listens in the following format:
+{
+    subtopic: 'uuid of the subtopic the user listened to',
+    user: 'the uuid of the user'
+}
