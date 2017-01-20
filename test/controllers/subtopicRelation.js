@@ -13,7 +13,7 @@ before(function() {
     listens = require('../../data/listens.json');
 });
 
-describe('subtopicRelation internals', () => {
+describe('subtopicRelation', () => {
     describe('Relation', () => {
         it('constructs without error', done => {
             var relation = new subtopicRelation.internals.Relation('0', 1, 1);
