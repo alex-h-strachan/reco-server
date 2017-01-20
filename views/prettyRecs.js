@@ -3,6 +3,7 @@ function prettyRecs(arr) {
 // eslint-disable-next-line indent
 return `<div class="rec">
     <div>${r.name}</div>
+    <div>${r.id}</div>
     <div>${r.description}</div>
 </div><br>`;
     });
