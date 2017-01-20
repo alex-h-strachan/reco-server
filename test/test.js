@@ -8,8 +8,9 @@ function gatherTestPaths(dir) {
 }
 
 var testPaths = [
-    ...gatherTestPaths(__dirname + '/controllers'),
+    ...gatherTestPaths(__dirname + '/models'),
     ...gatherTestPaths(__dirname + '/views'),
+    ...gatherTestPaths(__dirname + '/controllers'),
 ];
 
 testPaths.map( path => require(path));
