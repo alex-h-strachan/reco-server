@@ -9,7 +9,12 @@ var methods = {
         return relationTable[subtopicID];
     },
     listen(listen) {
-        relationTable.updateRelations(listen);
+        relationTable.recordListen(listen);
+    },
+    exactCount(parent, subtopic) {
+        return relationTable[parent]
+            .filter(rel => rel.subtopic == subtopic)[0]
+            .links;
     }
 };
 

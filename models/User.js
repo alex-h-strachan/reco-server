@@ -2,10 +2,18 @@ class User {
     constructor(id) {
         this.id = id;
         this.listenedTo = {};
+        this.lastListenWasNew;
     }
 
     listen(listen) {
-        this.listenedTo[listen.subtopic] = (this.listenedTo[listen.subtopic] || 0) + 1;
+        if(this.listenedTo[listen.subtopic]) {
+            // user has already listened to this so the relationship has already been recorded
+            this.lastListenWasNew = false;
+            return;
+        }
+
+        this.lastListenWasNew = true;
+        this.listenedTo[listen.subtopic] = true;
     }
 }
 

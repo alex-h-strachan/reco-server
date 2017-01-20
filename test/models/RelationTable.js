@@ -40,6 +40,40 @@ describe('RelationTable', () => {
         }
         return done();
     });
+
+    it('adds a new relationship accurately', done => {
+        var table = new RelationTable([
+            {subtopic: 1, user: 1},
+            {subtopic: 2, user: 1}
+        ], [
+            {name: '1', id: 1},
+            {name: '2', id: 2}
+        ]);
+
+        if(table[1][0].links == 1 && table[1][1].links == 1) {
+            return done();
+        } else {
+            return done(new Error('relationship wasn\'t correctly added'));
+        }
+    });
+
+    it('correctly handles duplicate listens', done => {
+        var table = new RelationTable([
+            {subtopic: 1, user: 1},
+            {subtopic: 2, user: 1},
+            {subtopic: 1, user: 1},
+        ], [
+            {name: '1', id: 1},
+            {name: '2', id: 2}
+        ]);
+
+        if(table[1][0].links == 1 && table[1][1].links == 1) {
+            return done();
+        } else {
+            return done(new Error('relationship wasn\'t correctly added'));
+        }
+    });
+
     it('has at least some relationship data recorded', done => {
         var nonzeroEntries = 0;
         var requiredNonzeroToPass = 100;
@@ -61,19 +95,19 @@ describe('RelationTable', () => {
     });
     it('updates relations for subtopics when a listen is recorded', done => {
         var table = new RelationTable([], subtopics);
-        var subtopicID = subtopics[0].id;
-        var listen = {
-            subtopic: subtopicID,
+        
+        var listens = [{
+            subtopic: subtopics[0].id,
             user: 0
-        };
+        },
+        {
+            subtopic: subtopics[1].id,
+            user: 0
+        }];
 
-        // create a new user to listen to the subtopic
-        var user = table.userTable.user(0);
-        user.listen(listen);
+        listens.forEach( l => table.recordListen(l) );
 
-        table.updateRelations(listen);
-
-        var rel = table[subtopicID].filter(rel => rel.subtopic == subtopicID)[0];
+        var rel = table[subtopics[0].id].filter(rel => rel.subtopic == subtopics[0].id)[0];
 
         if(rel.links == 1) {
             return done();

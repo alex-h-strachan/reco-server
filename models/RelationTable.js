@@ -15,14 +15,23 @@ class RelationTable {
     recordListen(listen) {
         var user = this.userTable.user(listen.user);
         user.listen(listen);
-        this.updateRelations(listen);
-    }
 
-    updateRelations(listen) {
-        var user = this.userTable.user(listen.user);
-        var row = this[listen.subtopic];
+        if(!user.lastListenWasNew) {
+            return;
+        }
 
-        row.filter( rel => user.listenedTo[rel.subtopic] ).forEach( rel => rel.addLink() );
+        var parent = listen.subtopic.toString();
+        var related = Object.keys(user.listenedTo).filter(id => id != parent);
+
+        related.forEach( id => updatePair.bind(this)([parent, id]) );
+
+        function updatePair(ids) {
+            ids.forEach( id => {
+                this[id]
+                    .filter( rel => ids.includes(rel.subtopic + '') )
+                    .forEach( rel => rel.addLink() );
+            });
+        }
     }
 }
 
