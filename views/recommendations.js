@@ -2,7 +2,7 @@ var orderedLinks = require('./orderedLinks');
 var prettyRecs = require('./prettyRecs');
 var subtopicIndex = require('../controllers/subtopicIndex');
 
-function getRecommendations(subtopic, limit = 10, pretty = false) {
+function getRecommendations(subtopic, limit = 4, pretty = false) {
     var links = orderedLinks(subtopic, limit);
     var ids = links.map( l => l.subtopic );
 
