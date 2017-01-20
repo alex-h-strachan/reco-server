@@ -43,11 +43,11 @@ describe('RelationTable', () => {
 
     it('adds a new relationship accurately', done => {
         var table = new RelationTable([
-            {subtopic: 1, user: 1},
-            {subtopic: 2, user: 1}
+            {subtopic: '1', user: '1'},
+            {subtopic: '2', user: '1'}
         ], [
-            {name: '1', id: 1},
-            {name: '2', id: 2}
+            {name: '1', id: '1'},
+            {name: '2', id: '2'}
         ]);
 
         if(table[1][0].links == 1 && table[1][1].links == 1) {
@@ -59,12 +59,12 @@ describe('RelationTable', () => {
 
     it('correctly handles duplicate listens', done => {
         var table = new RelationTable([
-            {subtopic: 1, user: 1},
-            {subtopic: 2, user: 1},
-            {subtopic: 1, user: 1},
+            {subtopic: '1', user: '1'},
+            {subtopic: '2', user: '1'},
+            {subtopic: '1', user: '1'},
         ], [
-            {name: '1', id: 1},
-            {name: '2', id: 2}
+            {name: '1', id: '1'},
+            {name: '2', id: '2'}
         ]);
 
         if(table[1][0].links == 1 && table[1][1].links == 1) {

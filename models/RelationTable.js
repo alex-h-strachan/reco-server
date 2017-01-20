@@ -20,18 +20,18 @@ class RelationTable {
             return;
         }
 
-        var parent = listen.subtopic.toString();
+        var parent = listen.subtopic;
         var related = Object.keys(user.listenedTo).filter(id => id != parent);
 
-        related.forEach( id => updatePair.bind(this)([parent, id]) );
+        related.forEach( id => this.updatePair([parent, id]) );
+    }
 
-        function updatePair(ids) {
-            ids.forEach( id => {
-                this[id]
-                    .filter( rel => ids.includes(rel.subtopic + '') )
-                    .forEach( rel => rel.addLink() );
-            });
-        }
+    updatePair(ids){
+        ids.forEach( id => {
+            this[id]
+                .filter( rel => ids.includes(rel.subtopic) )
+                .forEach( rel => rel.addLink() );
+        });
     }
 }
 
